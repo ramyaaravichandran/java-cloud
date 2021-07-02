@@ -1,0 +1,45 @@
+<div
+  id="chat-wrapper"
+  class="chat-wrapper shadow border-top border-left border-right  {{
+    chatVisibility ? 'chat--visible' : ''
+  }}"
+>
+  <div class="chat-title-bar">
+    Chat
+    <span class="chat-title-bar-close"
+      ><i class="fas fa-times-circle"></i
+    ></span>
+  </div>
+
+  <div id="chat" class="chat-log">
+    <div *ngFor="let message of myMessages" class="chat-self">
+      <div class="chat-message">
+        <div class="chat-message-inner">{{ message.message }}</div>
+      </div>
+      <img class="chat-avatar avatar-tiny" src="{{ message.avatar }}" />
+    </div>
+
+    <div class="chat-other" *ngFor="let message of othersMessages">
+      <a href="#"><img class="avatar-tiny" src="{{ message.avatar }}" /></a>
+      <div class="chat-message">
+        <div class="chat-message-inner">
+          <a href="#"
+            ><strong>{{ message.username }}</strong></a
+          >
+          {{ message.message }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <form id="chatForm" (ngSubmit)="sendMessage()" class="chat-form border-top">
+    <input
+      [formControl]="inputMessage"
+      type="text"
+      class="chat-field"
+      id="chatField"
+      placeholder="Type a message…"
+      autocomplete="off"
+    />
+  </form>
+</div>

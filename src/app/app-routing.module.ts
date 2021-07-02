@@ -1,10 +1,25 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './authGuard';
+import { CreatePostComponent } from './components/create-post/create-post.component';
+import { DashboardComponent } from './home/dashboard/dashboard.component';
+import { GuestComponent } from './home/guest/guest.component';
+import { UserService } from './services/user.service';
 
-const routes: Routes = [];
+const routes: Routes = [
+  { path: '', redirectTo: '/guest', pathMatch: 'full' }, // redirect to `first-component`
+  { path: 'guest', component: GuestComponent },
+  { path: 'home', component: DashboardComponent, canActivate: [AuthGuard] },
+  {
+    path: 'create-post',
+    component: CreatePostComponent,
+    canActivate: [AuthGuard],
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [UserService, AuthGuard],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
