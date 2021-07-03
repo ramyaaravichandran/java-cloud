@@ -19,12 +19,18 @@ export class GuestComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    // console.log('from header', this.header.loginError);
     this.signUpForm = this.formBuilder.group({
       username: ['', Validators.required],
       email: ['', Validators.required],
       password: ['', Validators.required],
     });
   }
+
+  get loginError() {
+    return this.userServe.loginError;
+  }
+
   get l() {
     return this.signUpForm.controls;
   }
@@ -42,7 +48,6 @@ export class GuestComponent implements OnInit {
         alert('error');
       }
     );
-    console.log(this.signUpForm.value);
     this.submitted = true;
   }
 }

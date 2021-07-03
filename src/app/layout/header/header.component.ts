@@ -11,6 +11,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class HeaderComponent implements OnInit {
   loginForm!: FormGroup;
+  loginError: boolean = false;
   submitted = false;
 
   constructor(
@@ -43,7 +44,7 @@ export class HeaderComponent implements OnInit {
         this.router.navigate(['home']);
       },
       () => {
-        alert('Login Failed');
+        this.auth.loginError = true;
       }
     );
     this.submitted = true;

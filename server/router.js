@@ -39,6 +39,8 @@ router.get(
   userController.mustBeLoggedIn,
   postController.viewCreateScreen
 );
+
+router.get("/posts", userController.mustBeLoggedIn, postController.getAllPosts);
 router.post(
   "/create-post",
   userController.mustBeLoggedIn,

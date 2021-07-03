@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class UserService {
+  loginError!: boolean;
   constructor(private http: HttpClient) {}
 
   signUp(data: RegUser): Observable<string> {
