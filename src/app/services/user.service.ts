@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { RegUser, loginUser } from '../interfaces';
+import { RegUser, loginUser, createPost } from '../interfaces';
 import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root',
@@ -26,11 +26,19 @@ export class UserService {
     return JSON.parse(localStorage.getItem('isLogedIn') || 'false');
   }
 
+  getProfile(): Observable<any> {
+    return this.http.get<any>(`/api/profile`);
+  }
+
   logout(): Observable<string> {
     return this.http.post<string>(`/api/logout`, undefined);
   }
 
-  // createPost(): {};
+  createPost(data: createPost): Observable<createPost> {
+    return this.http.post<createPost>(`/api/create-post`, data);
+  }
 
-  // allPosts(): {};
+  allPosts(): Observable<createPost[]> {
+    return this.http.get<createPost[]>(`/api/posts`);
+  }
 }

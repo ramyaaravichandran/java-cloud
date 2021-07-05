@@ -2,6 +2,7 @@ const User = require("../models/User");
 const Post = require("../models/Post");
 const Follow = require("../models/Follow");
 const jwt = require("jsonwebtoken");
+const { getObjId } = require("../utils/utill.js");
 
 exports.apiGetPostsByUsername = async function (req, res) {
   try {
@@ -238,5 +239,13 @@ exports.profileFollowingScreen = async function (req, res) {
     });
   } catch {
     res.render("404");
+  }
+};
+
+exports.getProfile = async function getProfile(req, res) {
+  if (req.session.user) {
+    res.json(req.session.user);
+  } else {
+    res.status(404).send("Can't fetch user profile");
   }
 };

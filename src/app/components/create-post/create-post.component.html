@@ -42,17 +42,17 @@
         id="post-body"
         class="body-content tall-textarea form-control"
         type="text"
-        formControlName="content"
-        [ngClass]="{ 'is-invalid': submitted && c.content.errors }"
+        formControlName="body"
+        [ngClass]="{ 'is-invalid': submitted && c.body.errors }"
       ></textarea>
       <div
-        *ngIf="c.content.touched && c.content.errors"
+        *ngIf="c.body.touched && c.body.errors"
         class="alert alert-danger text-center"
         data-toggle="tooltip"
         data-placement="bottom"
       >
         <small>
-          <div *ngIf="c.content.errors.required">Body Content is required</div>
+          <div *ngIf="c.body.errors.required">Body Content is required</div>
         </small>
       </div>
     </div>

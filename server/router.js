@@ -10,6 +10,7 @@ router.post("/register", userController.register);
 router.post("/login", userController.login);
 router.post("/logout", userController.logout);
 router.get("/isLogedin", userController.isLogedin);
+router.get("/profile", userController.getProfile);
 router.post("/doesUsernameExist", userController.doesUsernameExist);
 router.post("/doesEmailExist", userController.doesEmailExist);
 

@@ -14,3 +14,8 @@ export interface messageObj {
   message: string;
   avatar?: string;
 }
+
+export interface createPost {
+  title: string;
+  content: string;
+}

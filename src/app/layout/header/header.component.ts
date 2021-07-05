@@ -27,9 +27,11 @@ export class HeaderComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
+
   get s() {
     return this.loginForm.controls;
   }
+
   get isLogedIn() {
     return this.auth.isLogedIn();
   }
