@@ -101,11 +101,13 @@
               />
               <div
                 *ngIf="s.username.touched && s.username.errors"
-                class="text-danger"
+                class="text-warning"
               >
-                <div *ngIf="s.username.errors.required">
-                  UserName is required
-                </div>
+                <small>
+                  <div *ngIf="s.username.errors.required">
+                    UserName is required
+                  </div>
+                </small>
               </div>
             </div>
             <div class="col-md mr-0 pr-md-0 mb-3 mb-md-0 form-group">
@@ -119,19 +121,26 @@
               />
               <div
                 *ngIf="s.password.touched && s.password.errors"
-                class="text-danger"
+                class="text-warning"
               >
-                <div *ngIf="s.password.errors.required">
-                  Password is required
-                </div>
-                <div *ngIf="s.password.errors.minlength">
-                  Password should have atleast 6 characters
-                </div>
+                <small>
+                  <div *ngIf="s.password.errors.required">
+                    Password is required
+                  </div>
+                  <div *ngIf="s.password.errors.minlength">
+                    Password should have atleast 6 characters
+                  </div>
+                </small>
               </div>
             </div>
             <div class="col-md-auto">
               <input type="hidden" name="_csrf" value="" />
-              <button class="btn btn-primary btn-sm">Sign In</button>
+              <button
+                class="btn btn-primary btn-sm"
+                [disabled]="!loginForm.valid"
+              >
+                Sign In
+              </button>
             </div>
           </div>
         </form>

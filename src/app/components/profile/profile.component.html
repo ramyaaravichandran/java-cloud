@@ -8,9 +8,7 @@
   </h2>
 
   <div class="profile-nav nav nav-tabs pt-2 mb-4">
-    <a href="/profile/babs" class="profile-nav-link nav-item nav-link active"
-      >Posts: 1</a
-    >
+    <div class="profile-nav-link nav-item nav-link active">Posts: 1</div>
     <a href="/profile/babs/followers" class="profile-nav-link nav-item nav-link"
       >Followers: 0</a
     >
@@ -20,7 +18,7 @@
   </div>
 
   <div class="list-group">
-    <a
+    <div
       *ngFor="let post of posts"
       href="/post/60e2776d28340100044ca7b1"
       class="list-group-item list-group-item-action"
@@ -31,6 +29,7 @@
       />
       <strong>{{ post.title }}</strong> on
       {{ post.createdDate | date }}
-    </a>
+      <p>{{ post.body }}</p>
+    </div>
   </div>
 </div>

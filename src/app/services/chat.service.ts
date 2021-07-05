@@ -48,12 +48,19 @@ export class ChatService {
       this.chatVisible = !this.chatVisible;
       this.openConnection();
     }
-    this.openedYet = true;
+  }
+
+  toggleChat() {
+    if (!this.openedYet) {
+      this.chatVisible = !this.chatVisible;
+    }
+    this.openedYet = false;
   }
 
   get giveMyMessages() {
     return this.myMessages;
   }
+
   get giveOthersMessages() {
     return this.othersMessages;
   }

@@ -45,6 +45,7 @@ export class CreatePostComponent implements OnInit {
         console.error('There was an error!', error);
       },
     });
+    // this.router.navigate(['dashboard']);
     this.submitted = true;
   }
 }

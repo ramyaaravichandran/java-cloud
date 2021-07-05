@@ -40,7 +40,14 @@
             *ngIf="l.username.touched && l.username.errors"
             class="text-danger"
           >
-            <div *ngIf="l.username.errors.required">UserName is required</div>
+            <small>
+              <div
+                *ngIf="l.username.errors.required"
+                class="alert alert-danger text-center"
+              >
+                UserName is required
+              </div>
+            </small>
           </div>
         </div>
 
@@ -58,8 +65,15 @@
             formControlName="email"
             [ngClass]="{ 'is-invalid': submitted && l.email.errors }"
           />
-          <div *ngIf="l.email.touched && l.email.errors" class="text-danger">
-            <div *ngIf="l.email.errors.required">Email is required</div>
+          <div *ngIf="l.email.touched && l.email.errors">
+            <small>
+              <div
+                *ngIf="l.email.errors.required"
+                class="alert alert-danger text-center"
+              >
+                Email is required
+              </div>
+            </small>
           </div>
         </div>
 
@@ -76,11 +90,15 @@
             formControlName="password"
             [ngClass]="{ 'is-invalid': submitted && l.password.errors }"
           />
-          <div
-            *ngIf="l.password.touched && l.password.errors"
-            class="text-danger"
-          >
-            <div *ngIf="l.password.errors.required">Password is required</div>
+          <div *ngIf="l.password.touched && l.password.errors">
+            <small>
+              <div
+                *ngIf="l.password.errors.required"
+                class="alert alert-danger text-center"
+              >
+                Password is required
+              </div>
+            </small>
           </div>
         </div>
 
@@ -88,6 +106,7 @@
         <button
           type="submit"
           class="py-3 mt-4 btn btn-lg btn-success btn-block"
+          [disabled]="!signUpForm.valid"
         >
           Sign up for Postobook
         </button>

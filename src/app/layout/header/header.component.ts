@@ -56,7 +56,7 @@ export class HeaderComponent implements OnInit {
   logout() {
     this.auth.logout().subscribe(
       () => {
-        alert('loged out');
+        alert('logged out');
       },
       () => {
         localStorage.removeItem('isLogedIn');
