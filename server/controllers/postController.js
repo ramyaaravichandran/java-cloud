@@ -21,18 +21,6 @@ exports.create = function (req, res) {
     });
 };
 
-exports.apiCreate = function (req, res) {
-  let post = new Post(req.body, req.apiUser._id);
-  post
-    .create()
-    .then(function (newId) {
-      res.json("Congrats.");
-    })
-    .catch(function (errors) {
-      res.json(errors);
-    });
-};
-
 exports.viewSingle = async function (req, res) {
   try {
     let post = await Post.findSingleById(req.params.id, req.visitorId);
@@ -102,16 +90,6 @@ exports.delete = function (req, res) {
     });
 };
 
-exports.apiDelete = function (req, res) {
-  Post.delete(req.params.id, req.apiUser._id)
-    .then(() => {
-      res.json("Success");
-    })
-    .catch(() => {
-      res.json("You do not have permission to perform that action.");
-    });
-};
-
 exports.search = function (req, res) {
   Post.search(req.body.searchTerm)
     .then((posts) => {
@@ -122,12 +100,41 @@ exports.search = function (req, res) {
     });
 };
 
-exports.getAllPosts = async function (req, res) {
+exports.getUserPosts = async function (req, res) {
   var ObjectId = require("mongodb").ObjectId;
   try {
-    // let userId = req.session?.user?._id;
-    // userId = new ObjectId(userId);
-    let posts = await postCollection.find({}).toArray();
+    let userId = req.session?.user?._id;
+    userId = new ObjectId(userId);
+    let posts = await postCollection.find({ author: userId }).toArray();
+    res.json(posts);
+  } catch {
+    res.status(400).send("Error while fetching posts");
+  }
+};
+
+exports.getPublicFeeds = async function (req, res) {
+  var ObjectId = require("mongodb").ObjectId;
+  try {
+    let posts = await postCollection
+      .aggregate([
+        {
+          $lookup: {
+            from: "users",
+            localField: "author",
+            foreignField: "_id",
+            as: "users",
+          },
+        },
+        {
+          $project: {
+            user: { $arrayElemAt: ["$users", 0] },
+            title: 1,
+            body: 1,
+            createdDate: 1
+          },
+        },
+      ])
+      .toArray();
     res.json(posts);
   } catch {
     res.status(400).send("Error while fetching posts");

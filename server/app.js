@@ -11,7 +11,6 @@ const sanitizeHTML = require("sanitize-html");
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-app.use("/api2", require("./router-api"));
 app.use(cors());
 
 let sessionOptions = session({

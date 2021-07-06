@@ -41,7 +41,17 @@ router.get(
   postController.viewCreateScreen
 );
 
-router.get("/posts", userController.mustBeLoggedIn, postController.getAllPosts);
+router.get(
+  "/user-posts",
+  userController.mustBeLoggedIn,
+  postController.getUserPosts
+);
+
+router.get(
+  "/feeds",
+  userController.mustBeLoggedIn,
+  postController.getPublicFeeds
+);
 router.post(
   "/create-post",
   userController.mustBeLoggedIn,

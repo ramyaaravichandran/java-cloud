@@ -1,41 +1,68 @@
-<h2>
-  <img class="avatar-small" src="" />
-  <form class="ml-2 d-inline" action="/removeFollow" method="POST">
-    <input type="hidden" name="_csrf" value="" />
-    <button class="btn btn-danger btn-sm">
-      Stop Following <i class="fas fa-user-times"></i>
-    </button>
-  </form>
-  <form class="ml-2 d-inline" action="/addFollow" method="POST">
-    <input type="hidden" name="_csrf" value=">" />
-    <button class="btn btn-primary btn-sm">
-      Follow <i class="fas fa-user-plus"></i>
-    </button>
-  </form>
-</h2>
+<div class="container py-md-5 container--narrow">
+  <h2>
+    <img
+      class="avatar-small"
+      src="https://gravatar.com/avatar/0a6d70a332f96938c224b252f8dc4c1e?s=128"
+    />
+    {{ user.profileUsername }}
 
-<div class="profile-nav nav nav-tabs pt-2 mb-4">
-  <a
-    href="/profile"
-    class="
-      profile-nav-link
-      nav-item nav-link
-      <%=
-      currentPage
-      ==
-      'posts'
-      ?
-      'active'
-      :
-      ''
-      %>
-    "
-    >Posts: 12</a
-  >
-  <a href="/profile/followers" class="profile-nav-link nav-item nav-link"
-    >Followers: 1</a
-  >
-  <a href="/profile/following" class="profile-nav-link nav-item nav-link"
-    >Following: 1</a
-  >
+    <form class="ml-2 d-inline" action="/removeFollow/babs" method="POST">
+      <input
+        type="hidden"
+        name="_csrf"
+        value="QxuJUcf4-pX-ZtmxQv9kf6se6w6nmkvAi8Yk"
+      />
+
+      <button
+        type="button"
+        class="btn btn-danger"
+        *ngIf="user.isFollowing"
+        (click)="unFollow()"
+      >
+        Stop following
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary"
+        *ngIf="!user.isFollowing"
+        (click)="follow()"
+      >
+        Follow
+      </button>
+    </form>
+  </h2>
+
+  <div class="profile-nav nav nav-tabs pt-2 mb-4">
+    <a href="/profile/babs" class="profile-nav-link nav-item nav-link active"
+      >Posts: {{ user.counts.postCount }}</a
+    >
+    <div
+      href="/profile/babs/followers"
+      class="profile-nav-link nav-item nav-link"
+    >
+      Followers:{{ user.counts.followerCount }}
+    </div>
+    <div
+      href="/profile/babs/following"
+      class="profile-nav-link nav-item nav-link"
+    >
+      Following: {{ user.counts.followingCount }}
+    </div>
+  </div>
+
+  <div class="list-group">
+    <div
+      *ngFor="let post of user.posts"
+      href="/post/60e2776d28340100044ca7b1"
+      class="list-group-item list-group-item-action"
+    >
+      <img
+        class="avatar-tiny"
+        src="https://gravatar.com/avatar/0a6d70a332f96938c224b252f8dc4c1e?s=128"
+      />
+      <strong>{{ post.title }}</strong> on
+      {{ post.createdDate | date }}
+      <p>{{ post.body }}</p>
+    </div>
+  </div>
 </div>

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './authGuard';
 import { CreatePostComponent } from './components/create-post/create-post.component';
+import { ProfileSharedComponent } from './components/profile-shared/profile-shared.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { DashboardComponent } from './home/dashboard/dashboard.component';
 import { GuestComponent } from './home/guest/guest.component';
@@ -24,6 +25,11 @@ const routes: Routes = [
   {
     path: 'post',
     component: ProfileComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'shared-profile/:username',
+    component: ProfileSharedComponent,
     canActivate: [AuthGuard],
   },
 ];

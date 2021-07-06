@@ -65,6 +65,8 @@ export class HeaderComponent implements OnInit {
     );
   }
 
+  
+
   showChat() {
     this.chat.showChat();
   }

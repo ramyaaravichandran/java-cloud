@@ -39,6 +39,22 @@ export class UserService {
   }
 
   allPosts(): Observable<createPost[]> {
-    return this.http.get<createPost[]>(`/api/posts`);
+    return this.http.get<createPost[]>(`/api/user-posts`);
+  }
+
+  getFeeds(): Observable<any[]>{
+     return this.http.get<any[]>(`/api/feeds`);
+  }
+
+  getSharedUser(username: string | null): Observable<any>{
+     return this.http.get<any>(`/api/profile/${username}`);
+  }
+
+  addFollow(username: string | null): Observable<any>{
+     return this.http.post<any>(`api/addFollow/${username}`, undefined);
+  }
+
+  removeFollow(username: string | null): Observable<any>{
+     return this.http.post<any>(`api/removeFollow/${username}`, undefined);
   }
 }
